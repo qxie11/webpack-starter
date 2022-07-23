@@ -1,0 +1,8 @@
+<% var data = { title: "Заголовок | Проект", author: "Harrix" }; %> <%=
+_.template(require('../partials/header.html').default)(data) %>
+
+<div class="container">
+  <img src="images/webpack.png" alt="" />
+</div>
+
+<%= _.template(require('../partials/footer.html').default)(data) %>
