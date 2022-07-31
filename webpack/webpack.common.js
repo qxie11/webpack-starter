@@ -13,7 +13,6 @@ function generateHtmlPlugins(templateDir) {
     return new HtmlWebpackPlugin({
       filename: `${name}.html`,
       template: Path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
-      inject: false,
     });
   });
 }
@@ -21,7 +20,9 @@ function generateHtmlPlugins(templateDir) {
 const htmlPlugins = generateHtmlPlugins("../src/html/views");
 
 module.exports = {
-  entry: ["./src/scripts/index.js", "./src/styles/index.scss"],
+  entry: {
+    app: Path.resolve(__dirname, "../src/scripts/index.js"),
+  },
   output: {
     path: Path.join(__dirname, "../build"),
     filename: "js/[name].js",
@@ -35,17 +36,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: Path.resolve(__dirname, "../public"), to: "public" },
-        {
-          from: "./src/assets/fonts",
-          to: "./fonts",
-        },
-        {
-          from: "./src/assets/images",
-          to: "./images",
-        },
-      ],
+      patterns: [{ from: Path.resolve(__dirname, "../public"), to: "public" }],
     }),
   ].concat(htmlPlugins),
   resolve: {
@@ -61,9 +52,16 @@ module.exports = {
         type: "javascript/auto",
       },
       {
-        test: /\.html$/,
-        include: Path.resolve(__dirname, "../src/html/partials"),
-        use: ["raw-loader"],
+        test: /\.ejs$/i,
+        loader: "ejs-loader",
+        options: {
+          esModule: false,
+          minimize: true,
+        },
+      },
+      {
+        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        type: "asset/resource",
       },
     ],
   },
