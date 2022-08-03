@@ -45,10 +45,12 @@ module.exports = {
   resolve: {
     alias: {
       "~": Path.resolve(__dirname, "../src"),
-      "@node-modules": Path.resolve(__dirname, "../node_modules"),
+      "@node_modules": Path.resolve(__dirname, "../node_modules"),
       "@assets": Path.resolve(__dirname, "../src/assets"),
       "@images": Path.resolve(__dirname, "../src/assets/images"),
       "@icons": Path.resolve(__dirname, "../src/assets/images/icons"),
+      "@styles": Path.resolve(__dirname, "../src/styles"),
+      "@scripts": Path.resolve(__dirname, "../src/scripts"),
     },
   },
   module: {
