@@ -1,6 +1,6 @@
 import '@node_modules/swiper/swiper.scss';
 import "../styles/index.scss";
 
-const str: string = 'string';
+import controllerChecker from './controller';
 
-((): void => console.log(str))();
+controllerChecker();

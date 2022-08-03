@@ -56,6 +56,7 @@ module.exports = {
       "@styles": Path.resolve(__dirname, "../src/styles"),
       "@scripts": Path.resolve(__dirname, "../src/scripts"),
     },
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
@@ -63,6 +64,10 @@ module.exports = {
         test: /\.ts?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.js?$/,
+        type: "javascript/auto",
       },
       {
         test: /\.ejs$/i,
