@@ -11,7 +11,9 @@ function generateHtmlPlugins(templateDir) {
     const name = parts.slice(0, -1).join(".");
     const extension = parts.at(-1);
     return new HtmlWebpackPlugin({
-      filename: `${name.replace(".", "/")}.html`,
+      filename: !name.includes(".")
+        ? `${name}.html`
+        : `${name.replace(".", "/")}/index.html`,
       template: Path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
       minify: true,
     });
@@ -48,7 +50,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },

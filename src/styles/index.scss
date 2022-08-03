@@ -1,4 +1,6 @@
+@import "utils";
+
 body {
-  color: purple;
-  background: url("../images/webpack.png");
+  color: $black;
+  background: url("#{$images-path}/webpack.png");
 }

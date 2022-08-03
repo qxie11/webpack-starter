@@ -1,7 +1,9 @@
-const Webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CSSMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
+
 const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
@@ -24,12 +26,20 @@ module.exports = merge(common, {
           compress: true,
         },
       }),
+      new CSSMinimizerWebpackPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+        minify: CSSMinimizerWebpackPlugin.cssnanoMinify,
+      }),
     ],
   },
   plugins: [
-    new Webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-    }),
     new MiniCssExtractPlugin({
       filename: "css/[name].[chunkhash:8].css",
       chunkFilename: "css/[name].[chunkhash:8].chunk.js",
@@ -50,6 +60,24 @@ module.exports = merge(common, {
           "postcss-loader",
           "sass-loader",
         ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: ImageMinimizerPlugin.loader,
+        enforce: "pre",
+        options: {
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
+              plugins: [
+                "imagemin-gifsicle",
+                "imagemin-mozjpeg",
+                "imagemin-pngquant",
+                "imagemin-svgo",
+              ],
+            },
+          },
+        },
       },
     ],
   },

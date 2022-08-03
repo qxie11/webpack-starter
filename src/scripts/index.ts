@@ -1,3 +1,6 @@
+import '../../node_modules/swiper/swiper.scss';
 import "../styles/index.scss";
 
-((): void => console.log("webpack starterkit"))();
+const str: string = 'string';
+
+((): void => console.log(str))();
