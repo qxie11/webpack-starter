@@ -25,7 +25,10 @@ const htmlPlugins = generateHtmlPlugins("../src/html/views");
 
 module.exports = {
   entry: {
-    app: Path.resolve(__dirname, "../src/scripts/index.ts"),
+    app: [
+      Path.resolve(__dirname, "../src/scripts/index.ts"),
+      Path.resolve(__dirname, "../src/html/views/index.ejs"),
+    ],
   },
   output: {
     path: Path.join(__dirname, "../build"),
