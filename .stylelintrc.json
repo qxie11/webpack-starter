@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "custom-property-no-missing-var-function": null
+    "custom-property-no-missing-var-function": null,
+    "import-notation": null
   }
 }

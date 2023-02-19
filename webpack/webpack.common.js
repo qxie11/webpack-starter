@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 function generateHtmlPlugins(templateDir) {
   const templateFiles = fs.readdirSync(Path.resolve(__dirname, templateDir));
@@ -48,6 +49,7 @@ module.exports = {
     new FaviconsWebpackPlugin(
       Path.resolve(__dirname, "../src/assets/images/icons/icon.svg")
     ),
+    new Dotenv(),
   ].concat(htmlPlugins),
   resolve: {
     alias: {

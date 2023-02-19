@@ -62,19 +62,14 @@ module.exports = merge(common, {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(gif|svg)$/i,
         loader: ImageMinimizerPlugin.loader,
         enforce: "pre",
         options: {
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
             options: {
-              plugins: [
-                "imagemin-gifsicle",
-                "imagemin-mozjpeg",
-                "imagemin-pngquant",
-                "imagemin-svgo",
-              ],
+              plugins: ["imagemin-gifsicle", "imagemin-svgo"],
             },
           },
         },

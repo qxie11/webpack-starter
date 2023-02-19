@@ -1,10 +1,12 @@
 const Path = require("path");
-const Webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 
 const common = require("./webpack.common.js");
+
+const ESLINT_USE = false;
+const STYLE_LINT_USE = true;
 
 module.exports = merge(common, {
   target: "web",
@@ -20,19 +22,18 @@ module.exports = merge(common, {
     hot: true,
   },
   plugins: [
-    new Webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
-    }),
-    new ESLintPlugin({
-      extensions: "js",
-      emitError: true,
-      files: Path.resolve(__dirname, "../src"),
-    }),
-    new StylelintPlugin({
-      files: Path.join("src", "**/*.s?(a|c)ss"),
-      emitError: true,
-    }),
-  ],
+    ESLINT_USE &&
+      new ESLintPlugin({
+        extensions: "js",
+        emitError: true,
+        files: Path.resolve(__dirname, "../src"),
+      }),
+    STYLE_LINT_USE &&
+      new StylelintPlugin({
+        files: Path.join("src", "**/*.s?(a|c)ss"),
+        emitError: true,
+      }),
+  ].filter(Boolean),
   module: {
     rules: [
       {
