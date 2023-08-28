@@ -3,7 +3,7 @@ const fs = require("fs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+// const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 function generateHtmlPlugins(templateDir) {
@@ -46,9 +46,9 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [{ from: Path.resolve(__dirname, "../public"), to: "public" }],
     }),
-    new FaviconsWebpackPlugin(
-      Path.resolve(__dirname, "../src/assets/images/icons/icon.svg")
-    ),
+    // new FaviconsWebpackPlugin(
+    //   Path.resolve(__dirname, "../src/assets/images/icons/icon.svg")
+    // ),
     new Dotenv(),
   ].concat(htmlPlugins),
   resolve: {

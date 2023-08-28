@@ -1,15 +1,7 @@
-<% var data = { title: "Заголовок | Проект" }; %>
-
 <!DOCTYPE html>
 <html lang="en">
   <%= require('../partials/head.ejs')({ title: 'Главная' }) %>
   <body>
-    <%= require('../partials/header.ejs')(data) %>
-    <a href="/info/about">About</a>
-
-    <%= 2 + 2 %>
-
-    <img src="<%= require('@images/webpack.png') %>" alt="Webpack logo" />
-    <img src="<%= require('@icons/icon.svg') %>" alt="Webpack logo" />
+    <%= require('../partials/header.ejs')() %>
   </body>
 </html>
